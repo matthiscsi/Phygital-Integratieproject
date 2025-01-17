@@ -1,0 +1,30 @@
+﻿@model Pip.Domain.Flow.FlowSession
+
+@{
+    ViewBag.Title = "Wachtkamer";
+    Layout = "_LayoutPhygital";
+}
+<span class="d-none" id="flowsessionid">@Model.FlowSessionId</span>
+
+<div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center">
+    <h1 class="display-4 mb-4">Wachtkamer van flow @Model.Flow.Title</h1>
+    @if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+    {
+        <p class="lead mb-4">Klik op de knop of scan een qr code om aan de sessie deel te nemen.</p>
+        <a href="@Url.Action("ClientFlowStepIndex", "FlowStep", new { id = Model.FlowSessionId })" class="btn btn-primary btn-lg mb-2">Ga naar sessie als deelnemer</a>
+    }
+    else
+    {
+        <p>QR-code voor deelnemer</p>
+        <img src="@ViewBag.ParticipantQrCodeUrl" alt="QR-code voor deelnemer" title="QR-code voor deelnemer" style="width: 200px; height: 200px;">
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="@Url.Action("HostFlowStepIndex", "FlowStep", new { id = Model.FlowSessionId })" class="btn btn-primary btn-lg">Ga naar sessie als begeleider</a>
+    }
+
+
+</div>
+
+
+    

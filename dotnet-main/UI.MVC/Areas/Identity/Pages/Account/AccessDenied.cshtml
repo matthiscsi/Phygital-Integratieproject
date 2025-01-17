@@ -1,0 +1,11 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Toegang geweigerd";
+    Layout = "_LayoutAdmin";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">Je hebt geen toegang tot dit deel van de webapplicatie.</p>
+</header>

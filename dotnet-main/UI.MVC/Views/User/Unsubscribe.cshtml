@@ -1,0 +1,23 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Unsubscribe";
+    Layout = "_LayoutAdmin"; 
+}
+
+<h2>Unsubscribe</h2>
+
+@if (TempData["UnsubscribeMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["UnsubscribeMessage"]
+    </div>
+}
+
+<form asp-action="Unsubscribe" asp-controller="User" method="post">
+    <div class="form-group">
+        <label for="email">E-mailadres:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Uitschrijven</button>
+</form>

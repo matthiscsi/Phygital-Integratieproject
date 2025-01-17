@@ -1,0 +1,22 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> LocOptions
+
+
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = LocOptions.Value.SupportedCultures.Select(x => new SelectListItem { Value = x.Name, Text = Localizer.GetString(x.Name) }).ToList();
+    var returnUrl = Context.Request.Path;
+}
+<a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Localizer["Taal"]</a>
+<div class="dropdown-menu">
+    @foreach (var item in cultureList)
+    {
+        <form asp-action="CultureChange" asp-controller="Home" method="post" asp-route-returnUrl="@returnUrl" style="display: inline;">
+            <input type="hidden" name="culture" value="@item.Value" />
+            <button type="submit" class="dropdown-item">@item.Text</button>
+        </form>
+    }
+</div>

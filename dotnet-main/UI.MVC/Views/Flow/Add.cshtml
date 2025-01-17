@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model UI.MVC.Models.CreateFlowViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutAdmin";
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+        <div asp-validation-summary="All"></div>
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="text-center mb-4">Maak een nieuwe flow aan.</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form asp-controller="Flow" asp-action="Add" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="projectId" class="form-label" asp-for="ProjectId">Kies hier het project.</label>
+                            <select id="projectId" asp-for="ProjectId" class="form-select" aria-placeholder="Select a Project">
+                                <!-- Project options will be populated here -->
+                            </select>
+                            <span asp-validation-for="ProjectId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="flowTitle" class="form-label" asp-for="Title">Flow titel</label>
+                            <input id="flowTitle" asp-for="Title" maxlength="50" class="form-control"/>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                            <small id="flowTitleCount" class="form-text text-muted">0/50</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="flowDesc" class="form-label" asp-for="Description">Flow beschrijving</label>
+                            <textarea id="flowDesc" asp-for="Description" maxlength="200" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <small id="flowDescCount" class="form-text text-muted">0/200</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="themeTitle" class="form-label" asp-for="Theme.Title">Thema titel</label>
+                            <input id="themeTitle" asp-for="Theme.Title" maxlength="50" class="form-control"/>
+                            <span asp-validation-for="Theme.Title" class="text-danger"></span>
+                            <small id="themeTitleCount" class="form-text text-muted">0/50</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="themeBody" class="form-label" asp-for="Theme.Body">Thema beschrijving</label>
+                            <textarea id="themeBody" asp-for="Theme.Body" maxlength="200" class="form-control"></textarea>
+                            <span asp-validation-for="Theme.Body" class="text-danger"></span>
+                            <small id="themeBodyCount" class="form-text text-muted">0/200</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" asp-for="UploadedThemePicture">Thema foto</label>
+                            <input type="file" asp-for="UploadedThemePicture" class="form-control"/>
+                            <span asp-validation-for="UploadedThemePicture" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-check">
+                            <input asp-for="Physical" class="form-check-input"/>
+                            <label asp-for="Physical" class="form-check-label">Is de flow fysiek?</label>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Maak de flow aan.</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/addflow.entry.js"></script>
+    <script defer src="/dist/userexperience.entry.js"></script>
+}

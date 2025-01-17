@@ -1,0 +1,206 @@
+﻿@model UI.MVC.Models.Dto.FlowStepDtoWassim
+
+@{
+    ViewBag.Title = "Bewerk Flowstep";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Bewerk Flowstep: @Model.SubthemeTitle</h2>
+
+
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+        <div asp-validation-summary="All"></div>
+    </div>
+}                                                                                                                                                           
+
+<form asp-controller="Flow" asp-action="Details" asp-route-flowid="@Model.Flow" >
+    <button type="submit" class="btn btn-primary">Terug naar flow details</button>
+</form>
+
+
+<form id="form" asp-controller="FlowStep" asp-action="EditFlowStep" asp-route-id="@Model.FlowStepId" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="flowStepType" value="@Model.FlowStepType"/>
+
+    @switch (Model.FlowStepType)
+    {
+        case "Info":
+            <div id="infoFields">
+                <div class="form-group mb-3">
+                    <div class="form-check">
+                        <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="activeRadio" value="true">
+                        <label class="form-check-label" for="activeRadio">Is Actief?</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="notActiveRadio" value="false">
+                        <label class="form-check-label" for="notActiveRadio">Niet Actief?</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="infoBody" class="form-label">Inhoud:</label>
+                    <input asp-for="Body" type="text" id="infoBody" class="form-control" value="@Model.Body" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="infoImage" class="form-label">(optioneel) Foto:</label>
+                    @if (!string.IsNullOrEmpty(Model.UploadedImage))
+                    {
+                        <input asp-for="Image" type="file" value="@Model.UploadedImage" id="infoImage" class="form-control">
+                        <div class="mt-2">
+                            <span id="imageLabel">Momenteel heeft u deze foto:</span>
+                            <div class="mt-2">
+                                <img src="@Model.UploadedImage" alt="Uploaded image" class="img-fluid rounded" style="max-width: 400px; height: auto;">
+                            </div>
+                            <a asp-controller="FlowStep" asp-action="DeleteImage" asp-route-id="@Model.FlowStepId" type="button" class="btn btn-danger">Verwijder media</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <input asp-for="Image" type="file" id="infoImage" class="form-control">
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label for="infoVideo" class="form-label">(optioneel) Video:</label>
+                    <input asp-for="Video" type="file" id="infoVideo" class="form-control">
+                    @if (!string.IsNullOrEmpty(Model.UploadedVideo))
+                    {
+                        <div class="mt-2">
+                            <span id="videoLabel">Momenteel heeft u dit videofragment:</span>
+                            <div class="mt-2">
+                                <video controls class="w-100 rounded" style="max-width: 400px; height: auto;">
+                                    <source src="@Model.UploadedVideo" type="video/mp4">
+                                </video>
+                            </div>
+                            <button asp-controller="FlowStep" asp-action="DeleteVideo" asp-route-id="@Model.FlowStepId" type="button" class="btn btn-danger">Verwijder media</button>
+                        </div>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label for="infoAudio" class="form-label">(optioneel) Audio:</label>
+                    <input asp-for="Audio" type="file" id="infoAudio" class="form-control">
+                    @if (!string.IsNullOrEmpty(Model.UploadedAudio))
+                    {
+                        <div class="mt-2">
+                            <span id="audioLabel">Momenteel heb je deze audiofragment:</span>
+                            <div class="mt-2">
+                                <audio controls class="w-100" style="max-width: 400px;">
+                                    <source src="@Model.UploadedAudio" type="audio/mpeg">
+                                </audio>
+                            </div>
+                            <button asp-controller="FlowStep" asp-action="DeleteAudio" asp-route-id="@Model.FlowStepId" type="button" class="btn btn-danger">Verwijder media</button>
+                        </div>
+                    }
+                </div>
+            </div>
+            break;
+
+        case "ClosedQuestion":
+        case "MultipleChoiceQuestion":
+            <div class="form-group">
+        <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flowActive" id="activeRadio" value="true" @(Model.IsActive ? "checked" : "")>
+                    <label class="form-check-label" for="activeRadio">Is Actief?</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flowActive" id="notActiveRadio" value="false" @(!Model.IsActive ? "checked" : "")>
+                    <label class="form-check-label" for="notActiveRadio">Niet Actief?</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Query" class="control-label">Vraag</label>
+                <input asp-for="Query" class="form-control" value="@Model.Query"/>
+                <span asp-validation-for="Query" class="text-danger"></span>
+            </div>
+
+            <div id="optionsContainer">
+                @foreach (var option in Model.Options)
+                {
+                    <div class="option">
+                        <label for="optionText" class="form-label">Optie:</label>
+                        <input type="text" class="form-control" value="@option.Text" data-id="@option.Id" required>
+                        <button type="button" class="btn btn-danger removeOption">Verwijder</button>
+                    </div>
+                }
+            </div>
+
+            <button type="button" id="addOption" class="btn btn-primary">Voeg optie toe</button>
+
+            <partial name="_ConditionalPoints" model="Model"/>
+
+            break;
+        case "RangeQuestion":
+            <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="activeRadio" value="true">
+                    <label class="form-check-label" for="activeRadio">Is Actief?</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="notActiveRadio" value="false">
+                    <label class="form-check-label" for="notActiveRadio">Niet Actief?</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Query" class="control-label">Vraag</label>
+                <input asp-for="Query" class="form-control" value="@Model.Query"/>
+                <span asp-validation-for="Query" class="text-danger"></span>
+            </div>
+
+            <div id="rangeQuestionFields">
+                <label for="rangeQuestionMinValue" class="form-label">Minimale waarde:</label>
+                <input asp-for="MinValue" type="number" id="rangeQuestionMinValue" class="form-control" value="@Model.MinValue" required>
+
+                <label for="rangeQuestionMaxValue" class="form-label">Maximale waarde:</label>
+                <input asp-for="MaxValue" type="number" id="rangeQuestionMaxValue" class="form-control" value="@Model.MaxValue" required>
+            </div>
+
+            <partial name="_ConditionalPoints" model="Model"/>
+
+            break;
+        case "OpenQuestion":
+            <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="activeRadio" value="true">
+                    <label class="form-check-label" for="activeRadio">Is Actief?</label>
+                </div>
+                <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" type="radio" name="IsActive" id="notActiveRadio" value="false">
+                    <label class="form-check-label" for="notActiveRadio">Niet Actief?</label></div>
+                    
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Query" class="control-label">Vraag</label>
+                <input asp-for="Query" class="form-control" value="@Model.Query"/>
+                <span asp-validation-for="Query" class="text-danger"></span>
+            </div>
+            <partial name="_ConditionalPoints" model="Model"/>
+
+            break;
+    }
+
+    <div class="form-group">
+        <label for="subthemeSelect" class="form-label">Subthema:</label>
+        <select id="subthemeSelect" class="form-control" asp-for="SubthemeId">
+            <option value="@Model.SubthemeId">@Model.SubthemeTitle</option>
+            @foreach (var subtheme in Model.OtherSubthemes)
+            {
+                <option value="@subtheme.SubthemeId">@subtheme.Title</option>
+            }
+        </select>
+    </div>
+
+    <input type="hidden" id="flowStepId" value="@Model.FlowStepId"/>
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+</form>
+
+@section Scripts {
+    <script defer src="/dist/editflowstep.entry.js"></script>
+}

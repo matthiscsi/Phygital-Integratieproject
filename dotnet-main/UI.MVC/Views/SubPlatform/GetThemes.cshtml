@@ -1,0 +1,34 @@
+﻿@model UI.MVC.Models.Dto.CreateSubPlatformAdminViewModel
+
+@{
+    ViewBag.Title = "Alle thema's van projecten"; 
+    Layout = "_LayoutAdmin";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card-deck">
+                @foreach (var project in Model.Projects)
+                {
+                    @foreach (var flow in project.Flows)
+                    {
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">@flow.Theme.ThemeId. @flow.Theme.Title</h5>
+                                <p class="card-text">@flow.Theme.Body</p>
+                        
+
+                            
+                       <a href="@Url.Action("SendEmailToFlowUsers", "SubPlatform", new { flowId = flow.FlowId })" class="btn btn-primary">Verzend mail naar alle deelnemers</a>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

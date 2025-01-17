@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PIP.Domain.Flow.Flow>
+
+@{
+    Layout = "_LayoutPhygital";
+}
+@{
+    if (TempData["RedirectMessage"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["RedirectMessage"]
+        </div>
+    }
+}
+
+<h1 class="text-center my-5 text-info">Kies een hoofdthema</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @if (Model.Count() == 0)
+        {
+            <h2>Geen flows gevonden</h2>
+        }
+        else
+        {
+            @foreach (var flow in Model)
+            {
+                ViewData["Title"] = flow.Project.Name;
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card card-custom-hover h-100 bg-secondary-subtle">
+                        <img src="@Url.Content(flow.UrlFlowPicture)" class="card-img-top uniform-img" alt="@flow.Title">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@flow.Title</h5>
+                            <p class="card-text">@flow.Description</p>
+                            <a class="btn btn-primary mt-auto startButton" data-flowid="@flow.FlowId">Selecteer @flow.Title</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="row my-5">
+        <div class="col-md-12 text-center">
+            <div class="counter">
+
+                <h4 class="text-info"> Met hoeveel personen wil je de flow doorlopen? (1-4)</h4>
+                <div class="d-flex align-items-center justify-content-center">
+
+                    <button class="btn btn-outline-secondary counter-btn" id="decrementBtn">-</button>
+                    <div class="mx-2 text-info fs-4 counter-number" id="counter">1</div>
+                    <button class="btn btn-outline-primary counter-btn" id="incrementBtn">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script defer src="/dist/flowindex.entry.js"></script>

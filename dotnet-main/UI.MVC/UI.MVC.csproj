@@ -1,0 +1,262 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>disable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+        <MpaRoot>ClientApp\</MpaRoot>
+        <WWWRoot>wwwroot\</WWWRoot>
+        <DefaultItemExcludes>$(DefaultItemExcludes);$(MpaRoot)node_modules\**</DefaultItemExcludes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ClosedXML" Version="0.102.2" />
+        <PackageReference Include="CsvHelper" Version="32.0.1" />
+        <PackageReference Include="Google.Cloud.SecretManager.V1" Version="2.3.0" />
+        <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.20" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.18" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.18">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.20" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
+        <PackageReference Include="Npgsql" Version="7.0.7" />
+        <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Don't publish the MPA source files, but do show them in the project files list -->
+        <Content Remove="$(MpaRoot)**" />
+        <None Remove="$(MpaRoot)**" />
+        <None Include="$(MpaRoot)**" Exclude="$(MpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BL\BL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BL\BL.csproj" />
+        <ProjectReference Include="..\DAL\DAL.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\index.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\index.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\site.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\site.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\site.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\site.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\validation.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\validation.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\AppendAnswer.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\AppendAnswer.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\nextflowstep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\nextflowstep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\redirect.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\redirect.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\skiptheme.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\skiptheme.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addFlow.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addFlow.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowStepList.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowStepList.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\GetNextStep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\GetNextStep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\StartSession.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\StartSession.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\Subtheme.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\Subtheme.entry.js.map" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\ClosedQuestionAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\FlowAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\FlowStepAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\InfoViewAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\MultipleChoiceQuestionAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\OpenQuestionAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Statistics\RangeQuestionAnalysis.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FlowSession\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="secrets\googleappcred.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addflowstep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addflowstep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addsubthme.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addsubthme.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\closedquestionanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\closedquestionanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\collectdata.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\collectdata.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\deleteflowstep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\deleteflowstep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\dragandrop.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\dragandrop.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopen.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopen.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopenclient.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopenclient.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopenhost.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdoorlopenhost.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\formflowmethod.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\formflowmethod.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generateclienthtml.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generateclienthtml.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generatehosthtml.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generatehosthtml.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generatehtml.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\generatehtml.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\hidelogin.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\hidelogin.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\multiplechoicequestionanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\multiplechoicequestionanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\openquestionanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\openquestionanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\options.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\options.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\projectanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\projectanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\rangequestionanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\rangequestionanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\updateorder.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\updateorder.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\begeleiderscreen.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\begeleiderscreen.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\note.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\note.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\timer.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\timer.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\userexperience.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\userexperience.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\waitscreen.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\waitscreen.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addconditionalpoint.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\addconditionalpoint.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\totalresponsecount.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\totalresponsecount.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\conditionalpoint.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\conditionalpoint.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\editflowstep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\editflowstep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdetails.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowdetails.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowindex.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowindex.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowstep.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\flowstep.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\general.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\general.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\general.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\general.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsession.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsession.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessionclient.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessionclient.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessioncompanion.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessioncompanion.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessionhost.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\passflowsessionhost.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\projectform.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\projectform.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\subplatformanalysis.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\subplatformanalysis.entry.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\thankyou.entry.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\thankyou.entry.js.map" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Session" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\Home\Index.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Home\Index.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.nl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_LayoutAdmin.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_LayoutUser.nl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_LayoutAdmin.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_LayoutUser.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_Culture.nl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_Culture.nl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_Culture.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_Culture.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Views\Home\Index.nl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.nl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_LayoutAdmin.nl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_LayoutAdmin.nl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_Culture.nl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_Culture.nl.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+
+
+
+    <Target Name="NpmInstall" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(MpaRoot)node_modules') ">
+        <!-- Ensure Node.js is installed -->
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm install" />
+    </Target>
+
+    <Target Name="NpmRunBuild" BeforeTargets="Build" DependsOnTargets="NpmInstall">
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm run build" />
+    </Target>
+
+    <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+        <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm install" />
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm run build" />
+
+        <!-- Include the newly-built files in the publish output -->
+        <ItemGroup>
+            <DistFiles Include="$(WWWRoot)dist\**" />
+            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+                <RelativePath>%(DistFiles.Identity)</RelativePath>
+                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            </ResolvedFileToPublish>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="NpmClean" BeforeTargets="Clean">
+        <RemoveDir Directories="$(WWWRoot)dist" />
+        <RemoveDir Directories="$(MpaRoot)node_modules" />
+    </Target>
+
+</Project>

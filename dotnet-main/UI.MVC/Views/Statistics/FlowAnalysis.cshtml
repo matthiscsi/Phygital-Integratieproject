@@ -1,0 +1,52 @@
+@model UI.MVC.Models.Dto.FlowDto
+
+@{
+    ViewBag.Title = "Flow Analysis";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="container mt-5">
+    <span class="display-none" id="flowIdSpan" data-flow-id="@Model.Id"></span>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-4">Analyse voor flow: @Model.Title</h2>
+            <div>
+                <p class="mb-1">Aantal keren dat deze flow doorlopen is:</p>
+                <p id="flowSessionQuantity" class="display-4 fw-bold text-primary"></p>
+            </div>
+            <div class="">
+                <p class="mb-1">Gemiddelde tijd gespendeerd per deelname:</p>
+                <p id="averageTimeSpentForFlow" class="display-4 fw-bold text-success d-inline-block"></p>
+                <span class="align-middle"> seconden</span>
+            </div>
+            <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-1">Om een CSV-bestand te downloaden van de data van deze flow:</p>
+                        <a class="btn btn-warning btn-lg text-white fw-bold mt-3" href="@Url.Action("ExportFlowDataToCsv", "Statistics", new { flowId = Model.Id })">Download CSV</a>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h3 class="mb-0">Lijst van Flow Steps</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group" id="flowStepList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8 d-flex justify-content-center">
+            <canvas id="myChart" class="w-50 h-100  d-flex"></canvas>
+        </div>
+    </div>
+    
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script defer src="/dist/flowanalysis.entry.js"></script>
+}

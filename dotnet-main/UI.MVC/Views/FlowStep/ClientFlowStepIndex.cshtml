@@ -1,0 +1,42 @@
+﻿@model Pip.Domain.Flow.FlowSession
+
+@{
+    ViewBag.Title = "InvolveTheYouth";
+    Layout = "_LayoutPhygital";
+}
+
+<span class="d-none" id="flowsessionid">@Model.FlowSessionId</span>
+<span class="d-none" id="projectId">@Model.Flow.Project.ProjectId</span>
+@if (@Model.Flow == null)
+{
+    <span class="d-none" id="flowid">@Model.CirculaireFlows.CirculaireFlowId</span>
+}
+else
+{
+    <span class="d-none" id="flowid">@Model.Flow.FlowId</span>
+}
+
+<div class="col text-center">
+    <div class="spinner-container mt-3">
+        <div class="spinner-border text-primary small-spinner" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+
+    <button id="readybutton" type="button" class="btn btn-success mt-3 text-primary">Klik hier als je klaar bent om te beginnen</button>
+    <p id="waitingText" class="text-info" style="display: none">Wacht tot de andere jongeren klaar zijn</p>
+</div>
+<div class="container py-5">
+    <h2 class="text-center my-4 text-info" style="display: none">@ViewBag.Title</h2>
+
+    <div id="stapje" class="my-40" style="display: none">
+        <!-- Question content will be injected here -->
+    </div>
+    <div class="text-center mt-4" id="buttonDiv" style="display: none">
+        <button id="nextButton" class="btn btn-primary btn-lg">Volgende</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/passflowsessionclient.entry.js"></script>
+}

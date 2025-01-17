@@ -1,0 +1,40 @@
+﻿@model PIP.Domain.Flow.Flow
+
+@{
+    ViewBag.Title = "Ideeën";
+    Layout = "_LayoutPhygital";
+}
+
+<h1 class="display-4 text-center mb-5">ideeën over @Model.Title</h1>
+
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <h2 class="h4 mb-4">Bestaande Ideeën</h2>
+        @if (Model.Theme != null && Model.Theme.Ideas.Any())
+        {
+            <ul class="list-group">
+                @foreach (var idea in Model.Theme.Ideas)
+                {
+                    <li class="list-group-item">
+                        <strong>@idea.Title:</strong> @idea.Description
+                    </li>
+                    @if (!string.IsNullOrEmpty(idea.UrlPhoto))
+                    {
+                        <img src="@idea.UrlPhoto" alt="@idea.Title" width="200" height="200" />
+                    }
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Er zijn geen bestaande ideeën.</p>
+        }
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <h2 class="h4 mb-4">Nieuw Idee Toevoegen</h2>
+        <div>
+            <a href="@Url.Action("Create", "Idea", new { flowId = Model.FlowId })" class="btn btn-primary">Nieuw Idee Toevoegen</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+@model Pip.Domain.Flow.FlowSession
+
+@{
+    ViewBag.Title = "InvolveTheYouth";
+    Layout = "_LayoutPhygital";
+}
+<span class="d-none" id="flowsessionid">@Model.FlowSessionId</span>
+<div id="timerScreen" style="display:none;"></div>
+@if (@Model.Flow == null)
+{
+    <span class="d-none" id="flowid">@Model.CirculaireFlows.CirculaireFlowId</span>
+    <span class="d-none" id="projectId">@Model.CirculaireFlows.Flows.FirstOrDefault()!.Project.ProjectId</span>
+    <span class="d-none" id="flowsoort">@Model.CirculaireFlows.Flows.FirstOrDefault()!.Project.CirculaireFlow</span>
+}
+else
+{
+    <span class="d-none" id="flowid">@Model.Flow.FlowId</span>
+    <span class="d-none" id="projectId">@Model.Flow.Project.ProjectId</span>
+    <span class="d-none" id="flowsoort">@Model.Flow.Project.CirculaireFlow</span>
+}
+<div class="container py-5 d-flex">
+    <div class="flex-grow-1">
+        <h2 class="text-center my-4" style="display: none">@ViewBag.Title</h2>
+
+        <div id="stapje" class="my-4">
+            <!-- Question content will be injected here -->
+        </div>
+        <div class="text-center mt-4">
+            <button id="nextButton" class="btn btn-primary btn-lg" style="display: none">Volgende</button>
+            <button id="SkipButton" class="btn btn-secondary btn-lg" style="display: none">Subthema overslaan</button>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                <div class="py-5" id="BegeleiderDiv">
+                    <a asp-controller="FlowStep" asp-action="CompanionFlowStepIndex" asp-route-id="@Model.FlowSessionId" class="btn btn-primary mt-2">De flow doorlopen met een begeleider? Scan mij!</a>
+                </div>
+            }
+            else
+            {
+                <div class="py-5" id="BegeleiderDiv">
+                    <p>De flow doorlopen met een begeleider? Scan mij!</p>
+                    <img src="@Url.Content($"https://storage.googleapis.com/phygitalmediabucket/qr-code-flowSessionBegeleider-{Model.FlowSessionId}.png")" alt="QR-code voor begeleider" title="QR-code voor begeleider" style="width: 200px; height: 200px;">
+                </div>
+            }
+        }
+    </div>
+    <div class="ml-4">
+        <div id="cardGrid" class="row">
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/phygitalmediabucket/cross.jpg" class="card-img-top" alt="Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Kruis target</h5>
+                        <p class="card-text">Sla op dit target om bij een gesloten of een meerkeuze vraag een antwoord aan te kruisen </p>
+                        <p class="card-text">Sla op dit target om bij een range vraag de waarde omlaag te doen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/phygitalmediabucket/cycle.jpg" class="card-img-top" alt="Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cycle target</h5>
+                        <p class="card-text">Sla op dit target om bij een gesloten of een meerkeuze vraag een antwoord te selecteren </p>
+                        <p class="card-text">Sla op dit target om bij een range vraag de waarde omhoog te doen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/phygitalmediabucket/next.jpg" class="card-img-top" alt="Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Next knop</h5>
+                        <p class="card-text">Klik op deze knop om naar de volgende vraag te gaan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/phygitalmediabucket/skip.jpg" class="card-img-top" alt="Image 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Skip target</h5>
+                        <p class="card-text">Sla op dit target om een subthema over te slaan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/passflowsession.entry.js"></script>
+}

@@ -1,0 +1,36 @@
+﻿    @model Pip.Domain.Flow.FlowSession
+
+@{
+    ViewBag.Title = "InvolveTheYouth";
+    Layout = "_LayoutPhygital";
+}
+
+
+<span class="d-none" id="flowsessionid">@Model.FlowSessionId</span>
+@if (@Model.Flow == null)
+{
+    <span class="d-none" id="flowid">@Model.CirculaireFlows.CirculaireFlowId</span>
+    <span class="d-none" id="projectId">@Model.CirculaireFlows.Flows.FirstOrDefault()!.Project.ProjectId</span>
+    <span class="d-none" id="flowsoort">@Model.CirculaireFlows.Flows.FirstOrDefault()!.Project.CirculaireFlow</span>
+}
+else
+{
+    <span class="d-none" id="flowid">@Model.Flow.FlowId</span>
+    <span class="d-none" id="projectId">@Model.Flow.Project.ProjectId</span>
+    <span class="d-none" id="flowsoort">@Model.Flow.Project.CirculaireFlow</span>
+}
+<div class="container py-5">
+    <h2 class="text-center my-4" style="display: none">@ViewBag.Title</h2>
+
+    <div class="text-center mt-4">
+        <button id="playPauseButton" class="btn btn-secondary btn-lg bi bi-pause">
+        </button>
+        <button id="Notitie" class="btn btn-secondary btn-lg">Notitie</button>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script defer src="/dist/passflowsessioncompanion.entry.js"></script>
+
+}

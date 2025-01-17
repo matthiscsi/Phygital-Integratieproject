@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PIP.Domain.Flow.Theme>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutPhygital";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="container">
+    <div class="row">
+        @foreach (var t in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="theme-block bg-primary text-white">
+                    <h3>@t.Title</h3>
+                    <img src="@t.UrlThemePicture" alt="@t.Title" class="img-fluid mb-3">
+                    <p class="mb-0">Klik hier om <strong>@t.Title</strong> te selecteren</p>
+                    <button asp-controller="FlowStep" asp-action="Index" asp-route-id="2"></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Aanpassingen aan de stijl */
+    .theme-block {
+        height: 300px;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .theme-block:hover {
+        transform: translateY(-5px);
+    }
+
+    .theme-block h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .theme-block img {
+        max-height: 200px;
+        width: auto;
+    }
+</style>

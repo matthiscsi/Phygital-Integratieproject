@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Title of the Page";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="container mt-5">
+    <!-- Tab Navigation -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="flowDetails-tab" data-bs-toggle="tab" data-bs-target="#flowDetails" type="button" role="tab" aria-controls="flowDetails" aria-selected="true">Flow Details</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="subthemes-tab" data-bs-toggle="tab" data-bs-target="#subthemes" type="button" role="tab" aria-controls="subthemes" aria-selected="false">Subthemas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="flowSteps-tab" data-bs-toggle="tab" data-bs-target="#flowSteps" type="button" role="tab" aria-controls="flowSteps" aria-selected="false">Flow Steps</button>
+        </li>
+
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="myTabContent">
+        <!-- Flow Details Tab -->
+        <div class="tab-pane fade show active" id="flowDetails" role="tabpanel" aria-labelledby="flowDetails-tab">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@Model.Title</h2>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow Steps Tab -->
+        <div class="tab-pane fade" id="flowSteps" role="tabpanel" aria-labelledby="flowSteps-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Lijst van Flow Steps</h3>
+                    <ul class="list-group bg-transparent border-0" id="flowStepList"></ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Flowstep toevoegen</h3>
+                    <div id="validationSummaryFlowstep" class="alert alert-danger" style="display:none;"></div>
+
+                    <label for="questionType" class="form-label">Kies een optie:</label>
+                    <select id="questionType" class="form-select">
+                        <option value="select">Soort flowstep</option>
+                        <option value="closed">Closed Question</option>
+                        <option value="info">Info (Informational Text)</option>
+                        <option value="multiple">Multiple Choice Question</option>
+                        <option value="range">Range Question</option>
+                        <option value="open">Open Question</option>
+                    </select>
+                    <div id="closedQuestionFields" style="display: none;">
+                        <label for="closedQuestionText" class="form-label">Vraag:</label>
+                        <input type="text" id="closedQuestionText" class="form-control" required>
+                        <label for="numOptions" class="form-label">Aantal opties (max 4):</label>
+                        <select id="numOptions" class="form-select">
+                            <option value="0">Selecteer hier het aantal opties dat je wilt.</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <div id="closedOptionsContainer"></div>
+                    </div>
+                    <div id="multipleChoiceQuestionFields" style="display: none;">
+                        <label for="multipleChoiceQuestionText" class="form-label">Vraag:</label>
+                        <input type="text" id="multipleChoiceQuestionText" class="form-control" required>
+                        <label for="numMCOptions" the="form-label">Aantal opties (max 4):</label>
+                        <select id="numMCOptions" class="form-select">
+                            <option value="0">Selecteer hier het aantal opties dat je wilt.</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <div id="multipleChoiceOptionsContainer"></div>
+                    </div>
+                    <div id="rangeQuestionFields" style="display: none;">
+                        <label for="query" the="form-label">Vraag:</label>
+                        <input type="text" id="query" class="form-control" required>
+                        <label for="minValue" class="form-label">Minimum waarde:</label>
+                        <input type="number" id="minValue" class="form-control" required>
+                        <label for="maxValue" class="form-label">Maximum waarde:</label>
+                        <input type="number" id="maxValue" class="form-control" required>
+                    </div>
+                    <div id="openQuestionFields" style="display: none;">
+                        <label for="openQuestion" class="form-label">Vraag:</label>
+                        <input type="text" id="openQuestion" class="form-control" required>
+                    </div>
+                    <div id="infoFields" style="display: none;">
+                        <label for="infoBody" the="form-label">Inhoud:</label>
+                        <textarea id="infoBody" class="form-control" required></textarea>
+                        <label for="infoImage" class="form-label">(optioneel) Foto:</label>
+                        <input type="file" id="infoImage" class="form-control">
+                        <label for="infoVideo" class="form-label">(optioneel) Video:</label>
+                        <input type="file" id="infoVideo" class="form-control">
+                        <label for="infoAudio" the="form-label">(optioneel) Audio:</label>
+                        <input type="file" id="infoAudio" class="form-control">
+                    </div>
+
+                    <div id="subthemeSelect" style="display: none">
+                        <label for="subthemeSelectbox" class="form-label">Selecteer een subthema:</label>
+                        <select id="subthemeSelectbox" class="form-select"></select>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="addFlowstep" style="display: none;">Voeg flowstep toe</button>
+                    <div id="loadingFile" class="spinner-border" style="display: none" role="status">
+                        <span class="sr-only">Flowstep aan het maken</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subthemes Tab -->
+        <div class="tab-pane fade" id="subthemes" role="tabpanel" aria-labelledby="subthemes-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Lijst van Subthema's</h3>
+                    <ul class="list-group bg-transparent border-0" id="subthemeList"></ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Subthema Toevoegen</h3>
+                    <div id="validationSummarySubthema" class="alert alert-danger" style="display:none;"></div>
+                    <label for="subthemeTitle" class="form-label">Titel:</label>
+                    <input type="text" class="form-control" id="subthemeTitle" required>
+                    <label for="subthemeBody" class="form-label">Body:</label>
+                    <textarea class="form-control" id="subthemeBody" rows="3" required></textarea>
+                    <div style="display: none">
+                        <label for="subthemePhoto" class="form-label">Foto URL (optioneel):</label>
+                        <input type="file" class="form-control" id="subthemePhoto">
+
+                    </div> <button type="button" class="btn btn-primary" id="addSubthemeButton">Toevoegen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/flowdetails.entry.js"></script>
+}

@@ -1,0 +1,20 @@
+@model Pip.Domain.Flow.FlowSession
+
+@{
+    if (@Model.CirculaireFlows != null)
+    {
+        ViewBag.Title = @Model.CirculaireFlows.Flows.FirstOrDefault().Project.Name;
+    }
+    Layout = "_LayoutPhygital";
+}
+
+
+<h2>Klik op mij om verder te gaan</h2>
+<div class="text-center mt-2">
+    <button id="nextButtonWaitScreen" class="btn btn-primary btn-lg">Volgende</button>
+</div>
+<span id="flowsessionid">@Model.FlowSessionId</span>
+@section Scripts
+{
+    <script defer src="/dist/waitscreen.entry.js"></script>
+}

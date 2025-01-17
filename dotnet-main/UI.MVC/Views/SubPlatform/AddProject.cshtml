@@ -1,0 +1,66 @@
+﻿@model PIP.Domain.Deelplatform.Project
+
+@{
+    ViewBag.Title = "Project maken";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Project maken</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+        <div asp-validation-summary="All"></div>
+    </div>
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="AddProject" method="post">
+                        <div class="form-group">
+                            <label asp-for="Name" class="form-label">Naam:</label>
+                            <input id="projectName" asp-for="Name" maxlength="50" class="form-control" placeholder="Voer naam in" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <small id="projectNameCount" class="form-text text-muted">0/50</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description" class="form-label">Beschrijving:</label>
+                            <textarea id="projectDescription" asp-for="Description" maxlength="200" class="form-control" placeholder="Voer description in"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <small id="projectDescriptionCount" class="form-text text-muted">0/200</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IsActive" class="form-label">Actief maken?</label>
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" />
+                                <label asp-for="IsActive" class="form-check-label">Active</label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Maak project aan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{  
+    <script defer src="/dist/userexperience.entry.js"></script>
+
+}
+

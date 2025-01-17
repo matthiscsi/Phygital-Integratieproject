@@ -1,0 +1,26 @@
+﻿@model UI.MVC.Models.Dto.RangeQuestionDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutAdmin";
+}
+<h2>Analysis for: '@Model.Query'</h2>
+<div>
+    <span id="flowStepIdSpan" data-flowstep-id="@Model.FlowStepId" 
+          data-min-value="@Model.MinValue" 
+          data-max-value="@Model.MaxValue"></span>
+    <canvas id="myChart"></canvas>
+    <p>totale hoeveelheid replieken:</p>
+                <p id="totalResponse"></p>
+</div>
+
+ <p>Om een csv bestand te downloaden van de data van deze range vraag:</p>
+        <a class="m-lg-1 fw-bold rounded-2 nav-button bg-warning text-white justify-content-md-end btn" href="@Url.Action("ExportRangeQuestionDataToCsv", "Statistics", new { flowStepId = Model.FlowStepId })">Download CSV</a>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+@section Scripts{
+    <script defer src="/dist/rangequestionanalysis.entry.js"></script>
+
+}

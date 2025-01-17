@@ -1,0 +1,53 @@
+﻿@model PIP.Domain.Flow.Flow
+
+@{
+    ViewBag.Title = "Stuur een e-mail naar alle abonnees voor " + Model.Theme.Title;
+    Layout = "_LayoutAdmin";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+        <div asp-validation-summary="All"></div>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Theme.Title</h5>
+                    <p class="card-text">@Model.Theme.Body</p>
+                </div>
+            </div>
+            <form asp-action="SendEmailToFlowUsers" asp-controller="SubPlatform" method="post">
+                <input type="hidden" name="flowId" value="@Model.FlowId">
+                <div class="form-group">
+                    <label for="subject">E-mail titel:</label>
+                    <input type="text" class="form-control" id="subject" name="subject" maxlength="100" required>
+                    <small id="subjectCount" class="form-text text-muted">0/100</small>
+                </div>
+                <div class="form-group">
+                    <label for="messageToUsers">E-mail inhoud:</label>
+                    <textarea class="form-control" id="messageToUsers" name="messageToUsers" rows="4" maxlength="500" required></textarea>
+                    <small id="messageToUsersCount" class="form-text text-muted">0/500</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Verzend E-mail</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/dist/userexperience.entry.js"></script>
+}

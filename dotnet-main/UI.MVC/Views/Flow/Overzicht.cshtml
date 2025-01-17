@@ -1,0 +1,36 @@
+﻿@model IEnumerable<UI.MVC.Models.Dto.FlowDto>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+
+<h1 class="text-center my-5 text-info">Flow overzicht</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @if (Model.Count() == 0)
+        {
+            <h2>Geen flows gevonden</h2>
+        }
+        else
+        {
+            @foreach (var flow in Model)
+            {
+                ViewData["Title"] = flow.ProjectName;
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card card-custom-hover h-100 bg-info">
+                        <img src="@Url.Content(flow.UrlPhoto)" class="card-img-top uniform-img" alt="@flow.Title">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@flow.Title</h5>
+                            <p class="card-text">@flow.Description</p>
+                            <a asp-controller="Flow" asp-action="Details" asp-route-flowid="@flow.Id" class="btn btn-success mt-auto">Selecteer @flow.Title</a>
+                            <a asp-controller="Statistics" asp-action="FlowAnalysis" asp-route-flowid="@flow.Id" class="btn btn-primary mt-2">Bekijk analyse voor @flow.Title</a>
+                            <a asp-controller="SubPlatform" asp-action="SendEmailToFlowUsers" asp-route-flowId="@flow.Id" class="btn btn-warning mt-2">Stuur een e-mail naar alle abonnees voor @flow.Title</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

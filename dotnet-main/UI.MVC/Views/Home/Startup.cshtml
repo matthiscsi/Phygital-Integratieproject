@@ -1,0 +1,31 @@
+﻿@model PIP.Domain.Deelplatform.Project
+
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "_LayoutPhygital";
+}
+@{
+    if (TempData["RedirectMessage"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["RedirectMessage"]
+        </div>
+    }
+}
+
+<div class="container full-height d-flex flex-column justify-content-center">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <div class="text-center">
+                <h1 class="fw-bold my-4 startup-title text-info">Denk mee, doe mee, verander mee!</h1>
+                <p class="startup-description text-info">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-12 text-center">
+            <a asp-controller="Flow" asp-action="Index" asp-route-id="@Model.ProjectId" class="btn btn-success btn-lg px-5 py-2">Laat Je Horen!</a>
+        </div>
+    </div>
+</div>

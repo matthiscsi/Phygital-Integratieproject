@@ -1,0 +1,47 @@
+﻿@model UI.MVC.Models.Dto.SubPlatformAdministratorDto
+
+@{
+    ViewBag.Title = "Bewerk Subplatform";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+        <div asp-validation-summary="All"></div>
+    </div>
+}
+<form asp-controller="Administrator" asp-action="EditSubPlatform" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label>Naam organisatie:</label>
+        <input asp-for="Name" id="Name" maxlength="25" class="form-control" value="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <small id="NameCount" class="form-text text-muted">0/25</small>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" id="Email" maxlength="50" class="form-control" value="@Model.Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <small id="EmailCount" class="form-text text-muted">0/50</small>
+    </div>
+    <div class="form-group">
+        <label>Introductie organisatie</label>
+        <input asp-for="MainText" id="MainText" maxlength="100" class="form-control" value="@Model.MainText" />
+        <span asp-validation-for="MainText" class="text-danger"></span>
+        <small id="MainTextCount" class="form-text text-muted">0/100</small>
+    </div>
+    <div class="form-group">
+        <label>Link naar organisatie:</label>
+        <input asp-for="Link" id="Link" class="form-control" value="@Model.Link" />
+        <span asp-validation-for="Link" class="text-danger"></span>
+        <small id="LinkCount" class="form-text text-muted">0/100</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+</form>
+
+@section Scripts {
+    <script src="~/dist/userexperience.entry.js"></script>
+}

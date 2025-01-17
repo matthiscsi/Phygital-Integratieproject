@@ -1,0 +1,34 @@
+﻿@model UI.MVC.Models.Dto.ProjectDto
+
+@{
+    ViewBag.Title = "Project Analysis";
+    Layout = "_LayoutAdmin";
+}
+
+<div class="container mt-5">
+    <div class="bg-light p-5 rounded shadow-sm">
+        <h2 class="text-center mb-4">Analyse voor project: <span class="badge bg-warning text-dark">@Model.Name</span></h2>
+                    <span id="projectIdSpan" data-project-id="@Model.ProjectId"></span>
+        <div class="mb-5 text-center">
+            <h5 class="mb-3">Aantal keren dat flows van dit project doorlopen zijn:</h5>
+            <p id="flowSessionQuantityOfProject" class="display-4 fw-bold text-primary"></p>
+        </div>
+
+        <div class="mb-5 text-center">
+            <h5 class="mb-3">Gemiddelde tijd gespendeerd aan de flows van dit project:</h5>
+            <p id="averageTimeSpentForProject" class="display-4 fw-bold text-success d-inline-block"></p>
+                                    <span class="align-middle"> seconden</span>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <h5>Om een csv bestand te downloaden van de data van dit project en de bijhorende flows:</h5>
+            <a class="btn btn-warning btn-lg text-white fw-bold mt-3" href="@Url.Action("ExportProjectDataToCsv", "Statistics", new { projectId = Model.ProjectId })">Download CSV</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script defer src="/dist/projectanalysis.entry.js"></script>
+}

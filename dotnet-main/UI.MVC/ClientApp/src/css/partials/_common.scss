@@ -1,0 +1,44 @@
+﻿// _common.scss
+@import 'variables';
+
+body {
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+}
+
+.paused {
+  opacity: 0.5; /* Lower opacity when paused */
+}
+
+.img-home {
+  max-width: 40%;
+}
+
+.bi-info-circle {
+  font-size: 5rem;
+}
+.startup-title{
+  font-size: 3.1rem;
+  font-weight: bold;
+}
+.startup-description{
+  font-size: 2rem;
+}
+.full-height {
+  height: 100vh; /* Full viewport height */
+}
+#cardGrid {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px; /* Adjust width as needed */
+}
+
+#cardGrid .card {
+  flex: 0 0 55%; /* Adjust size as needed */
+  margin: 1%;
+}
+
+#cardGrid .card-img-top {
+  height: auto;
+}
+
+

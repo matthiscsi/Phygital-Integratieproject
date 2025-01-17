@@ -1,0 +1,42 @@
+﻿@model PIP.Domain.Flow.Subtheme
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Verfijn je Visie: Bewerk @Model.Title</h2>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <h4>Fouten:</h4>
+      <div asp-validation-summary="All" ></div>
+    </div>
+}  
+
+  @if (TempData["Message"] != null)
+  {
+      <div class="alert alert-success">@TempData["Message"]</div>
+  }
+<div id="subthemes" class="container">
+    
+    <form asp-controller="Subtheme" asp-action="Edit" method="post">
+        <div class="mb-3">
+            <label for="subthemeTitle" class="form-label">Titel:</label>
+            <input type="text" class="form-control" id="subthemeTitle" name="Title" value="@Model.Title" required>
+        </div>
+        <div class="mb-3">
+            <label for="subthemeBody" class="form-label">Body:</label>
+            <textarea class="form-control" id="subthemeBody" name="Body" rows="3" required>@Model.Body</textarea>
+        </div>
+        <div class="mb-3" style="display: none">
+            <label for="subthemePhoto" class="form-label">Foto URL (optioneel):</label>
+            <input type="file" class="form-control" id="subthemePhoto" name="UrlFlowPicture" value="@Model.UrlPhoto">
+            @if (!string.IsNullOrEmpty(Model.UrlPhoto))
+            {
+                <img src="@Model.UrlPhoto" alt="@Model.Title" class="img-fluid mb-3"/>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+    </form>
+</div>

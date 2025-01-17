@@ -1,0 +1,83 @@
+﻿@model PIP.Domain.Flow.Flow
+
+@{
+    ViewBag.Title = Model.Project.Name;
+    Layout = "_LayoutPhygital";
+    var validationErrors=ViewData["ValidationErrors"] as string;
+}
+
+
+@if (!string.IsNullOrEmpty(validationErrors))
+{
+    <div class="alert alert-danger">
+        <strong>Validatiefouten:</strong>
+        <ul>
+            @foreach (var error in validationErrors.Split('|'))
+            {
+                if (!string.IsNullOrEmpty(error))
+                {
+                    <li>@error</li>
+                }
+            }
+        </ul>
+    </div>
+}<span id="projectTheme" style="display: none">@Model.Project.ProjectId</span>
+<div class="container">
+    <div class="text-center">
+        <h2 class="text-info">Einde van vragenlijst met theme @Model.Theme.Title</h2>
+        <h2 class="font-monospace text-info">Bedankt voor uw deelname</h2>
+        @if (TempData["UserCreated"] != null && (bool)TempData["UserCreated"])
+        {
+            <div class="alert alert-success" role="alert">
+                U bent succesvol geregistreerd in onze database!
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(validationErrors))
+        {
+            <div class="alert alert-danger">
+                <strong>Validatiefouten:</strong>
+                <ul>
+                    @foreach (var error in validationErrors.Split('|'))
+                    {
+                        if (!string.IsNullOrEmpty(error))
+                        {
+                            <li>@error</li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="p-5 col-md-6">
+            <h3 class="text-info">Laat je gegevens achter om te weten hoe het project is verlopen!</h3>
+            <form method="post" action="@Url.Action("CreateUser", "WebappUser", new { flowId = Model.FlowId })">
+                <div class="form-group">
+                    <label for="name">Naam:</label>
+                    <input type="text" class="form-control text-info" id="name" name="name" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control text-info" id="email" name="email" required="required">
+                </div>
+                <div class="p-2">
+                    <button type="submit" class="btn btn-primary">Wees geïnformeerd!</button>
+                </div>
+            </form>
+        </div>
+        <div class="p-5 col-md-6">
+            <div class="text-center">
+                <p class="text-info">Scan deze QR code om uw ideeën te delen</p>
+                <img src="@Url.Content($"https://storage.googleapis.com/phygitalmediabucket/qr-code-ThankYou-{Model.FlowId}.png")" alt="QR code" style="width: 400px; height: 400px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button id="backButton" class="btn btn-primary">Terug naar Home</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/thankyou.entry.js"></script>
+}

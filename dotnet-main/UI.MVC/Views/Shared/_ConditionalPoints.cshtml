@@ -1,0 +1,77 @@
+﻿@using NuGet.ContentModel
+@using UI.MVC.Controllers.FlowSession.Flow
+@using UI.MVC.Models.Dto
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Collections
+@model UI.MVC.Models.Dto.FlowStepDtoWassim
+
+<style>
+    .conditional-point {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .conditional-point h5 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .conditional-point label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+</style>
+
+<div id="conditionalPointsContainer">
+    <h4>Conditionele punten:</h4>
+    @foreach (var conditionalPoint in Model.ConditionalPointDtos)
+    {
+        <div class="conditional-point">
+            <label>Conditioneel punt:</label>
+            @if (conditionalPoint.FollowUpStep.Header != null)
+            {
+                <p><strong>Header:</strong> @conditionalPoint.FollowUpStep.Header</p>
+            }
+            @if (conditionalPoint.FollowUpStep.Query != null)
+            {
+                <p><strong>Vraag:</strong> @conditionalPoint.FollowUpStep.Query</p>
+            }
+             <a asp-controller="FlowStep" asp-action='Edit' asp-route-id="@conditionalPoint.FollowUpStep.FlowStepId" class="btn btn-success mt-2">
+                            Bewerk Opvolg stap
+                        </a>
+            <p>Criteria</p>
+            @if (conditionalPoint.Criteria.answer != null)
+            {
+                <p><strong>Antwoord:</strong> @conditionalPoint.Criteria.answer</p>
+            }
+            @if (conditionalPoint.Criteria.SelectedValue != null)
+            {
+                <p><strong>Geselecteerd antwoord:</strong> @conditionalPoint.Criteria.Options.First()</p>
+            }
+            @if (conditionalPoint.Criteria.SelectedAnswer!=0)
+            {
+                <p><strong>Geselecteerd antwoord:</strong> @conditionalPoint.Criteria.SelectedAnswer</p>
+            }
+            @if (conditionalPoint.Criteria.SelectedAnswers != null && conditionalPoint.Criteria.SelectedAnswers.Count > 0)
+            {
+                List<string> strings = new List<string>();
+                foreach (OptionDto option in conditionalPoint.Criteria.Options)
+                {
+                    strings.Add(option.Text);
+                }
+                <p><strong>Geselecteerde antwoorden:</strong> @string.Join(", ", strings)</p>
+                                                                                  
+            }
+        </div>
+    }
+    <a asp-controller="FlowStep" asp-action='AddConditionalPoint' asp-route-flowStepId="@Model.FlowStepId" class="btn btn-success mt-2">
+        Voeg een conditioneel punt toe
+    </a>
+</div>
+
+@section Scripts{
+}

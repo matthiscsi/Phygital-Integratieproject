@@ -1,0 +1,102 @@
+###
+
+       GET https://localhost:7019/FlowStep/index/api/flowsteps/1
+
+Content-Type: application/json
+
+
+###
+
+POST https://localhost:7019/api/Responses/addanswer
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Answer": "Een voorbeeldantwoord",
+  "Question": "Een voorbeeldvraag"
+}
+
+###
+
+GET https://localhost:7019/api/Flowsteps/next/2
+Accept: application/json
+Content-Type: application/json
+###
+GET https://localhost:7019/api/Flowsteps/1
+Accept: application/json
+Content-Type: application/json
+
+###
+POST https://localhost:7019/api/Flowsteps/post
+Accept: application/json
+Content-Type: application/json
+
+{
+  "FlowStepId": 1,
+  "FlowId": 1,
+  "FlowStepType": "Question",
+  "Question": "Een voorbeeldvraag",
+  "Answers": [
+    {
+      "Answer": "Een voorbeeldantwoord"
+    }
+  ]
+}
+###
+GET https://localhost:7019/api/Subtheme/flow/1
+Accept: application/json
+Content-Type: application/json
+
+### 
+DELETE https://localhost:7019/api/Flowsteps/delete/7
+Accept: application/json
+Content-Type: application/json
+###
+DELETE https://localhost:7019/api/Subtheme/1
+Accept: application/json
+Content-Type: application/json
+###
+GET https://localhost:7019/api/Subtheme/flow/3
+Accept: application/json
+Content-Type: application/json
+###
+PUT https://localhost:7019/api/Options/updateoptions/1
+Accept: application/json
+Content-Type: application/json
+###
+POST https://localhost:7019/api/FlowSessions/startFlowsession/1?expectedUser=3
+Accept: application/json
+Content-Type: application/json
+
+###
+
+POST https://localhost:7019/Sensor/movement-detected
+Accept: application/json
+Content-Type: application/json
+###
+PUT https://localhost:7019/api/Subtheme/1
+Accept: application/json
+Content-Type: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8JL0rhC8LodHvNPkzy7SuqZPv785jTae0hRkYG5NVK-H-Cj1Iv_0-CQPCOS9vwKYE2mLCzuRl79xWcGWz48RH3s4qvF8XTD6sYeeg-z3xmwk4AJH9hzlnjBQsPtVGSjHSuZ-FPIDGjn17EAVX0vJFk2hauokfxBsgrTOq9byMChsXL58jCAJS9ye_oTdXV0CB59UBjjNoPNiE6yX0UK62rl2TUa2E8FSAh0GfQu_ZYesnc-nuHUfh_3SJ1JLjNCiUNj08sHxIrTC059ZpKYvrwZE-7iOsTnXrMGUawXlyK4aMWYMuKqU8n4FWoBVYg1stYenZv_6GJQT6-C15iwOMv8Oe1eoWr-VHCobwZmpPKoPkARRzL7lrhWmiygZhTs-XGVM6x4ZD-_x4K28gYnkE1vyu_82p4LaxIE4O3VDefrFvzkytU8dB5DVbU-5O1Jjq3tlJyUEM5UOSFw1hcMZV4TRdKtpz0jf_97myQ09cOot4G9dikLSiVHEULuoTn8Im4hGIeYsqlOi4NVmDMLSfqcfXZYoa4uQcBvmq-SdorePIzFTqIuAq12IlOZVMq3tRC77GPzu8mA3-2IWJSG32609D5zYN5IWeg-ojaWG0d75BvxmrqvAIkrnxMjQsI0JFnq-NTVBG-kieQoKvoXk5nachbRtxjOdud2ngZCK6afgxKvGlhRld6s5d3Zbh7otgzVf4Q3ySobRJstXSVpYdAYGwMrN4zZZD9hPm4x83mptV14wtXDlvtabpydK1rs7RirVync2tp3emSJX09aEVwNrYrk2TaB1v7vLbJj3zgZqHy_pd6_slUn940g-wIvhuJMJ9O9OSCsduvt6gvBhmcOx0oSjQzV4O0s6UrprxVxl
+{
+"SubthemeId": 1,
+"Name": "Een voorbeeldsubthema",
+"Description": "Een voorbeeldbeschrijving",
+"FlowId": 1
+}
+###
+GET https://localhost:7019/flowSessionCount/1
+Accept: application/json
+Content-Type: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8JL0rhC8LodHvNPkzy7SuqYRTGpF-pJHg3uMs9YZNO9ih0j_jQh85UBt9i8rMtCUFqGTXD75ZnOkzIIgYBAwW71WVQIpnY-iEgI45rc4jKWXrL1GnV8kltYM86KcmhFd5JJrSsY_9n7cM-GXd8s-_Ie2aclD57RvTg52YK616bbWOTriXwhh1t9Jo6H9dBfnQQzhXFwwK3C5VksoMzjyq8sbLKijIhwQyqbjfgjbTu0tqf1I--HvgiUkAXDX4iRcJI7DJXdGRK-mhfUDvkAtsWWz6CKR7vhwVqiTRZsNTkCGaV1h7or3uJk5PMONlEiq3nnkV3wnL3mfQGxxVouM3nByz_QeSEE7MbewcM0EX8AqThmeGVCDTRNSN07htQBC3daIGElTR53Ob-wvCIREWAHSIrEFTaVYfW-gUp8BGFmATS4j8MN5Z_tyG0WNpDHK7zpVlXNKdqQxh2-IB26WoMeP0uByEUcq1TNVX2UgMLYExHC3eUXRf5j4q5-zNb1yY8wraTPLJPSlab61UAH_u8ZxyosklsRZowa4ou4aqJ8pNIklf3k4WIH52QSzvcF4LfBIK679Dxx9viRo7r3IxZ3Fhv-_KVzf_tsU1Cj9kDU-yZtfTj8nQvrW8fcS4XyglZJ29Q45kXc4qNIXbZa3z8LCTmX1XnEiVGwwWfvf7p8dMhR4bVx46HyrXsnlW1L8n_jQFZ74EnBkInJVET7t9-PnwUF1PJ3y9eAJNhOto4wkatHY5542fDEVLcbDNRyPo_Boz2oAwod1C_pCoMYpYnGTu1LGCDZYXzUsKJpcqbnLkWkGnk0-uW0MuzUbnxzZjAhjGndY4hoS6dh6AQLb6hkquBJ_4BoV8v2kQfrM85ptq-pDmb_Zoq8k8EUy27zShA
+###
+GET https://localhost:7019/api/Responses/ClosedQuestionAnswersData/5
+Accept: application/json
+Content-Type: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8JL0rhC8LodHvNPkzy7SuqaSAwgPkJBdElfQQFGvwGWS6gspXZcDhJbAPvJlyV9jwkXS_wjKPt7hAESHxCEFA1t4u-FwEY-JBsSuv_dWDQoMOs8aS3Q5ZL6iZ-gm11RsSFOzIwRIqW-932uxzO3A99VRsUuuKiwDC3WCERmkAxU6A_XnlKZ8ImKX9hS6gwsG0H_ochRpR1YdtVIs3NqJN2Y8TT9SbXw3u3XE0kzGU2tY1FhWEFdwhAvhRM8so70VXLy0JdsyTvm2Mux2p1Z8O4G1qiBqBvActjoSm53rqqerarr4cClxPlB7PB0dJEOWS3DjfYncWb0Kn02ekfNX3ej1YQCMdlozS-yOC5KMRdKWrQths_miFygyYd8Ekgc6yyzLR_HXHYpI0j6nu7UJxZEWPtbXbsGGWzoepj24vXPYPn_M2fWijXwPG3x1QAEuqzPMmoAJBu4khp0p-SXy7c5lBUV92i6dmtXjCGeRXe-lgnFUthA18u3ysYeF9qCAIQ6O3LqYMF8KveN4yz2KiYLZPZp4oAMbg2TIrzNr85L4RAzIOjABeFaBCq6RVO74uwai9vJzaB_AnzCktIjMUpzuzhyth83Tf1qKcdr44-xp0nzSJtnVbbiZkv9iTeYyWgFZKrsS1eFco5NvSS8Ao06Ai02OtFAMl-Pg3tJrppCA299U3Vcs7BQ5_v6pRA2US7U4JO_qWeOZWxhTvOcc96xxKCmRmhKiQh6CB9wu10a99WuHmgVm9x0WJd_WY5v8zGiPf9ehR2gtT1UDVRrNa0Dghx3RRllt6K36kAMijUj1weX7pck8F92PtEdsfcVsfy19Kb-AXvQruO9Y3lcoUK30gDVYw9v_RrKK3vulvxtmnkNKSf2Rz7aUZ8c6vKdREA
+
+###
+PUT https://localhost:7019/api/Projects/FlowSoort
+Accept: application/json
+Content-Type: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8JL0rhC8LodHvNPkzy7SuqaSAwgPkJBdElfQQFGvwGWS6gspXZcDhJbAPvJlyV9jwkXS_wjKPt7hAESHxCEFA1t4u-FwEY-JBsSuv_dWDQoMOs8aS3Q5ZL6iZ-gm11RsSFOzIwRIqW-932uxzO3A99VRsUuuKiwDC3WCERmkAxU6A_XnlKZ8ImKX9hS6gwsG0H_ochRpR1YdtVIs3NqJN2Y8TT9SbXw3u3XE0kzGU2tY1FhWEFdwhAvhRM8so70VXLy0JdsyTvm2Mux2p1Z8O4G1qiBqBvActjoSm53rqqerarr4cClxPlB7PB0dJEOWS3DjfYncWb0Kn02ekfNX3ej1YQCMdlozS-yOC5KMRdKWrQths_miFygyYd8Ekgc6yyzLR_HXHYpI0j6nu7UJxZEWPtbXbsGGWzoepj24vXPYPn_M2fWijXwPG3x1QAEuqzPMmoAJBu4khp0p-SXy7c5lBUV92i6dmtXjCGeRXe-lgnFUthA18u3ysYeF9qCAIQ6O3LqYMF8KveN4yz2KiYLZPZp4oAMbg2TIrzNr85L4RAzIOjABeFaBCq6RVO74uwai9vJzaB_AnzCktIjMUpzuzhyth83Tf1qKcdr44-xp0nzSJtnVbbiZkv9iTeYyWgFZKrsS1eFco5NvSS8Ao06Ai02OtFAMl-Pg3tJrppCA299U3Vcs7BQ5_v6pRA2US7U4JO_qWeOZWxhTvOcc96xxKCmRmhKiQh6CB9wu10a99WuHmgVm9x0WJd_WY5v8zGiPf9ehR2gtT1UDVRrNa0Dghx3RRllt6K36kAMijUj1weX7pck8F92PtEdsfcVsfy19Kb-AXvQruO9Y3lcoUK30gDVYw9v_RrKK3vulvxtmnkNKSf2Rz7aUZ8c6vKdREA

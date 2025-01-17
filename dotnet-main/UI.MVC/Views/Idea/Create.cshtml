@@ -1,0 +1,48 @@
+﻿@model UI.MVC.Models.CreateIdeaViewModel
+
+@{
+    ViewBag.Title = "Nieuw Idee Toevoegen";
+    Layout = "_LayoutPhygital";
+}
+
+<h1 class="display-4 text-center mb-5">Nieuw Idee Toevoegen</h1>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        @using (Html.BeginForm("Create", "Idea", FormMethod.Post, new { @class = "needs-validation", enctype = "multipart/form-data", novalidate = "novalidate" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.FlowId) 
+
+            <div class="mb-3">
+                <label for="Title" class="form-label">Titel:</label>
+                <input type="text" class="form-control" id="Title" name="Title" placeholder="Voer titel in" required>
+                <div class="invalid-feedback">
+                    Voer een geldige titel in.
+                </div>
+            </div>
+
+            <div class="mb-3"> 
+                <label for="Description" class="form-label">Beschrijving:</label>
+                <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Voer beschrijving in" required></textarea>
+                <div class="invalid-feedback">
+                    Voer een geldige beschrijving in.
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" asp-for="Photo">Foto</label>
+                <input type="file" asp-for="Photo" class="form-control"/>
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Verzenden</button>
+                <a href="@Url.Action("Index", "Idea", new { flowId = Model.FlowId })" class="btn btn-secondary">Annuleren</a>
+            </div>
+        }
+    </div>
+</div>

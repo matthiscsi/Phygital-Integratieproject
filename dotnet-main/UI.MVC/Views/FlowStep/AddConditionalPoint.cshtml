@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model UI.MVC.Models.CreateConditionalPointViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutAdmin";
+}    
+
+<form asp-controller="FlowStep" asp-action="Edit" asp-route-id="@Model.FlowStepId">
+    <button type="submit" class="btn btn-primary">Terug naar flowstep bewerken</button>
+</form>
+<p class="h1 text-center text-decoration-underline">Conditioneel punt toevoegen</p>
+<div class="col-md-12">
+    <h3  class="text-center font-weight-bold">Kies een antwoord waarop je een conditioneel punt wil toevoegen</h3>
+    <div id="stapje" class="row my-4">
+        <span id="flowStepId">@Model.FlowStepId</span>
+   
+    </div>
+    <div class="row">
+        <h3 class="text-center font-weight-bold" >Followup flowstep voor conditionalpoint</h3>
+        <label for="questionType" class="form-label">Kies een optie:</label>
+        <select id="questionType" class="form-select">
+            <option value="select">Soort flowstep</option>
+            <option value="closed">Closed Question</option>
+            <option value="info">Info (Informational Text)</option>
+            <option value="multiple">Multiple Choice Question</option>
+            <option value="range">Range Question</option>
+            <option value="open">Open Question</option>
+        </select>
+
+        <div id="closedQuestionFields" style="display: none;">
+            <label for="closedQuestionText" class="form-label">Vraag:</label>
+            <input type="text" id="closedQuestionText" class="form-control" required>
+            <label for="numOptions" class="form-label">Aantal opties (max 4):</label>
+            <select id="numOptions" class="form-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+
+            </select>
+            <div id="closedOptionsContainer"></div>
+        </div>
+
+        <div id="multipleChoiceQuestionFields" style="display: none;">
+            <label for="multipleChoiceQuestionText" class="form-label">Vraag:</label>
+            <input type="text" id="multipleChoiceQuestionText" class="form-control" required>
+            <label for="numMCOptions" class="form-label">Aantal opties (max 4):</label>
+            <select id="numMCOptions" class="form-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+
+            </select>
+            <div id="multipleChoiceOptionsContainer"></div>
+        </div>
+
+        <div id="rangeQuestionFields" style="display: none;">
+            <label for="query" class="form-label">Vraag:</label>
+            <input type="text" id="query" class="form-control" required>
+            <label for="minValue" class="form-label">Minimum waarde:</label>
+            <input type="number" id="minValue" class="form-control" required>
+            <label for="maxValue" class="form-label">Maximum waarde:</label>
+            <input type="number" id="maxValue" class="form-control" required>
+
+        </div>
+
+        <div id="openQuestionFields" style="display: none;">
+            <label for="openQuestion" class="form-label">Vraag:</label>
+            <input type="text" id="openQuestion" class="form-control" required>
+
+        </div>
+
+        <div id="infoFields" style="display: none;">
+            <label for="infoBody" class="form-label">Inhoud:</label>
+            <textarea id="infoBody" class="form-control" required></textarea>
+            <label for="infoImage" class="form-label">(optioneel) Foto:</label>
+            <input type="file" id="infoImage" class="form-control">
+            <label for="infoVideo" class="form-label">(optioneel) Video:</label>
+            <input type="file" id="infoVideo" class="form-control">
+            <label for="infoAudio" class="form-label">(optioneel) Audio:</label>
+            <input type="file" id="infoAudio" class="form-control">
+        </div>
+
+        <button class="mt-1 btn btn-primary" id="addConditionalPointButton">Add Conditional Point</button>
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script defer src="/dist/conditionalpoint.entry.js"></script>
+}

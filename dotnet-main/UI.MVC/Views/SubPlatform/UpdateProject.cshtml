@@ -1,0 +1,70 @@
+﻿@model PIP.Domain.Deelplatform.Project
+
+@{
+    ViewBag.Title = "Bewerk Project";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Update Project</h2>
+<div id="validationSummary" class="alert alert-danger" style="display:none;">
+</div>
+<span style="display: none" id="projectSpanId">@Model.ProjectId</span>
+
+<form id="form" asp-action="UpdateProject" asp-controller="SubPlatform" method="post" asp-route-FlowId="@Model.ProjectId">
+    <div class="form-group">
+        <label asp-for="Name">Project naam</label>
+        <input id="Name" asp-for="Name" class="form-control" maxlength="50"/>
+        <span asp-validation-for="Name" class="text-danger"></span> 
+        <small id="NameCount" class="form-text text-muted">0/50</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Project beschrijving</label>
+        <textarea id="Description" asp-for="Description" class="form-control" maxlength="200"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <small id="DescriptionCount" class="form-text text-muted">0/200</small>
+    </div>
+    <div class="form-group">
+              <div class="form-check">
+        <input class="form-check-input" type="radio" name="flowActive" id="activeRadio" @(Model.IsActive ? "checked" : "")>
+        <label class="form-check-label ms-2" for="activeRadio">
+            Is Actief?
+        </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flowActive" id="notActiveRadio" @(!Model.IsActive ? "checked" : "")>
+        <label class="form-check-label ms-2" for="notActiveRadio">
+            Niet Actief?
+        </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="BackgroundColor">Achtergrondkleur</label>
+        <input id="BackgroundColor" asp-for="BackgroundColor" type="color" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Font">Lettertype</label>
+        <input id="Font" asp-for="Font" class="form-control" placeholder="bv, Arial, Verdana" maxlength="30"/>
+        <small id="FontCount" class="form-text text-muted">0/30</small>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flowType" id="circulairRadio" @(Model.CirculaireFlow ? "checked" : "")>
+            <label class="form-check-label ms-2" for="circulairRadio">
+                Circulaire Flow
+            </label>
+        </div>
+              <div class="form-check">
+        <input class="form-check-input" type="radio" name="flowType" id="linearRadio" @(!Model.CirculaireFlow ? "checked" : "")>
+        <label class="form-check-label ms-2" for="linearRadio">
+            Lineaire Flow
+        </label>
+          </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+@section Scripts
+{
+    <script defer src="/dist/userexperience.entry.js"></script>
+        <script defer src="/dist/projectform.entry.js"></script>
+}

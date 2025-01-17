@@ -1,0 +1,46 @@
+﻿@model UI.MVC.Models.Dto.OpenQuestionDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_LayoutAdmin";
+}
+<body>
+<header class="bg-light p-4">
+    <div class="container text-center">
+        <h1 class="mb-0 text-dark">Analysis for: '@Model.Query'</h1>
+    </div>
+</header>
+<main class="container">
+    <span id="flowStepIdSpan" data-flowstep-id="@Model.FlowStepId"></span>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div>
+                <canvas id="myChart" class=""></canvas>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <p>totale hoeveelheid replieken:</p>
+            <p id="totalResponse"></p>
+
+            <p>Antwoorden:</p>
+            <div id="answersList" style="height: 200px; overflow-y: scroll; margin-top: 20px;">
+            </div><a class="m-lg-1 fw-bold rounded-2 nav-button bg-warning text-white justify-content-md-end btn" href="@Url.Action("ExportOpenQuestionDataToCsv", "Statistics", new { flowStepId = Model.FlowStepId })">Download CSV van woordfrequenties</a>
+
+            <a class="m-lg-1 fw-bold rounded-2 nav-button bg-warning text-white justify-content-md-end btn" href="@Url.Action("ExportOpenAnswersToCsv", "Statistics", new { flowStepId = Model.FlowStepId })">Download CSV met alle antwoorden</a>
+        </div>
+    </div>
+
+
+</main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+@section Scripts{
+    <script defer src="/dist/openquestionanalysis.entry.js"></script>
+
+}

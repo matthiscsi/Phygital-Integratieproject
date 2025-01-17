@@ -1,0 +1,13 @@
+﻿// _spinner.scss
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh; 
+}
+
+.small-spinner {
+  width: 3rem;
+  height: 3rem;
+}

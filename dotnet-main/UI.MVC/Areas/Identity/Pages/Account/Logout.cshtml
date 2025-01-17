@@ -1,0 +1,29 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Meld af";
+    Layout = "_LayoutAdmin";
+}
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-md-6 mt-5">
+                <header class="text-center mt-5">
+                    <h1 class="display-4 mt-5">Wil je zeker afmelden?</h1>
+                </header>
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" class="text-center">
+                        <button type="submit" class="mt-5 btn btn-danger btn-lg logout-btn">Meld af</button>
+                    </form>
+                }
+                else
+                {
+                    <p class="lead text-center">U bent succesvol afgemeld.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+</body>
