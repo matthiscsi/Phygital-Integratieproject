@@ -65,9 +65,7 @@ dotnet ../phygitalappbuilt/UI.MVC.dll --urls http://*:8080
 
 Het lokaal runnen van de applicatie zal automatisch werken met een sqlite databank. Om te runnen met de PostgreSQL databank die gedeployed staat in de cloud, zult u in dotnet/UI.MVC/Properties/launchSettings.json de ASPNETCORE_ENVIROMENT moeten aanpassen van "Development" naar "Production".
 
-Bovendien: In deze oplevering zal er een "secrets" folder meegegeven worden in de UI.MVC folder. Het json bestand in deze folder heeft de nodige informatie om te authenticeren met een service account die toegang heeft tot de cloud omgeving. Zonder deze folder zal de applicatie niet lokaal runnen, want hij zal geen toegang hebben tot geheime objecten die in de cloud worden bijgehouden (bv. de connectionstring). Aan de andere hand, wanneer de applicatie via de `deploy.sh` script gedeployed is, zal deze zelfs zonder de secrets folder correct functioneren. Hij krijgt authenticatie meegegeven doorheen google cloud zelf, zonder enige hardcoding.
-
-Het is belangrijk om te begrijpen dat deze secrets folder GEEN best practice is, en uitsluitend voor deze oplevering wordt meegegeven. Ook de credentials van de testgebruikers zijn geheim. In de gitlab repository van de dotnet code alsook de deployment repository worden credentials NIET in version control bijgehouden.
+Er worden GEEN belangrijke credentials meegegeven in deze repositories.
 
 ## Deployment Repository
 
