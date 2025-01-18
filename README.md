@@ -53,13 +53,13 @@ dotnet ../phygitalappbuilt/UI.MVC.dll --urls http://*:8080
 ### Credentials van Testgebruikers:
 
 - **Gebruiker:** admin@kdg.be  
-  **Wachtwoord:** PIP_AdminUserPhygital0852!
+  **Wachtwoord:** 
 
 - **Gebruiker:** Sadmin@kdg.be  
-  **Wachtwoord:** PIP_SubplatformAdminUserPhygital1973!
+  **Wachtwoord:** 
 
 - **Gebruiker:** companion@kdg.be  
-  **Wachtwoord:** PIP_CompanionUserPhygital2020!
+  **Wachtwoord:**
 
 ### Bijkomende informatie voor development
 
